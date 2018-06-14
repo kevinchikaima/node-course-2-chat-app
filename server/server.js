@@ -17,17 +17,12 @@ io.on('connection', (socket) => {
   console.log('New user connected');
 
   socket.emit('adminText', generateMessage('Admin','Welcome to Kevin\'s chat app'));
-
   socket.broadcast.emit('newUser', generateMessage('Admin', 'New user has logged in'));
 
-  socket.on('createMessage', (newMessage) => {
+  socket.on('createMessage', (newMessage, callback) => {
     console.log('createMessage', newMessage);
-      io.emit('newMessage', generateMessage(newMessage.from, newMessage.text));
-    // socket.broadcast.emit('newMessage',{
-    //   from: newMessage.from,
-    //   text: newMessage.text,
-    //   createdAt: new Date().getTime()
-    // });
+    io.emit('newMessage', generateMessage(newMessage.from, newMessage.text));
+    callback('This is from the server.');
   });
 
   socket.on('disconnect', () => {
@@ -38,5 +33,3 @@ io.on('connection', (socket) => {
 server.listen(port, () => {
   console.log(`Server is up on port ${port}`);
 });
-
-//module.exports = {app};
