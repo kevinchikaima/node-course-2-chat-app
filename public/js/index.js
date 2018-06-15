@@ -43,12 +43,12 @@ socket.on('newLocationMessage', function (message) {
   jQuery('#messages').append(li);
 });
 
-socket.emit('createMessage', {
-  from: 'Kevin',
-  text: 'Hello there!'
-}, function (data) {
-  console.log('got it ', data);
-});
+// socket.emit('createMessage', {
+//   from: 'Kevin',
+//   text: 'Hello there!'
+// }, function (data) {
+//   console.log('got it ', data);
+// });
 
 jQuery('#message-form').on('submit', function (e) {
   e.preventDefault();
